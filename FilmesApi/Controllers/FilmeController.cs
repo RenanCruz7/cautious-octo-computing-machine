@@ -29,15 +29,13 @@ public class FilmeController : ControllerBase
     /// <response code="201">Caso inserção seja feita com sucesso</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public IActionResult AdicionaFilme(
-        [FromBody] CreateFilmeDto filmeDto)
+    public IActionResult AdicionaFilme([FromBody] CreateFilmeDto filmeDto)
     {
         Filme filme = _mapper.Map<Filme>(filmeDto);
         _context.Filmes.Add(filme);
         _context.SaveChanges();
         return CreatedAtAction(nameof(RecuperaFilmePorId),
-            new { id = filme.Id },
-            filme);
+            new { id = filme.Id },filme);
     }
 
     [HttpGet]
